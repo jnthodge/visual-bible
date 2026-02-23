@@ -12,7 +12,6 @@ export type BibleImageRecord = {
   name: string;
   outputPath: string;
   imagePath: string;
-  createdAt: string;
   references: string[];
   highlights: HighlightRegion[];
 };

@@ -2,11 +2,10 @@
 
 A Spring Boot + React app that:
 
-1. Accepts scripture references from both a `.txt` upload and a paste/type textbox.
-2. Parses many reference forms (e.g., `Acts 1:12`, `Ac1:12`, `1Jn2:3`, `1 John 3:3`).
-3. Generates a full-Bible tiny-text image layout left-to-right by book with breaks between books and a wider break between Old and New Testament.
-4. Highlights selected references in bright red and allows click-to-inspect verse text in the sidebar.
-5. Saves each generated topic map (name + image path + passage set), and displays them in a list view.
+1. Accepts a `.txt` list of scripture references (one per line, e.g. `John 3:1`).
+2. Generates a very large image representing the full Bible chapter flow and highlights matching passages in red.
+3. Saves the image to a user-provided output path with a user-provided name.
+4. Lists saved maps by name, displays the selected image, and shows highlighted verse text on hover.
 
 ## Run backend
 
@@ -14,8 +13,6 @@ A Spring Boot + React app that:
 cd backend
 mvn spring-boot:run
 ```
-
-Backend: `http://localhost:8080`
 
 ## Run frontend
 
@@ -26,20 +23,17 @@ npm run dev
 ```
 
 Frontend: `http://localhost:5173`
+Backend: `http://localhost:8080`
 
-## How to test manually
+## Passage file format
 
-1. Start backend and frontend.
-2. Open frontend.
-3. Enter a topic name, output path, and either upload `sample-passages.txt` or paste references.
-4. Click **Generate + Save**.
-5. In the saved list view, click the topic.
-6. Click bright-red highlighted portions of the image and verify the selected verse appears in the right sidebar.
+Plain text, one passage per line:
 
-## Bible dataset resource
+```txt
+Genesis 1:1
+Psalms 23:1
+John 3:1
+Revelation 22:1
+```
 
-A generated Bible visualization dataset is bundled at:
-
-- `backend/src/main/resources/bible/kjv_full.csv`
-
-The application generates a static base image at startup (`data/output/base-bible.png`) and logs generation progress.
+Only exact `Book Chapter:1` entries are highlighted in this generated overview image.
