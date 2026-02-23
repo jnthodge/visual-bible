@@ -1,0 +1,138 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: #1f1f1f;
+  background: #f7f7f9;
+}
+
+body { margin: 0; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 380px 1fr 360px;
+  min-height: 100vh;
+}
+
+.sidebar,
+.detail-panel {
+  padding: 1rem;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.detail-panel {
+  border-right: none;
+  border-left: 1px solid #ddd;
+}
+
+.sidebar label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+input, textarea {
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 0.45rem;
+  font-family: inherit;
+}
+
+button {
+  border: none;
+  border-radius: 6px;
+  background: #2f5ad6;
+  color: #fff;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+}
+
+.viewer {
+  padding: 1rem;
+  overflow: auto;
+}
+
+.zoom-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.zoom-row input[type='range'] {
+  width: 260px;
+}
+
+.image-viewport {
+  width: min(1100px, calc(100vw - 820px));
+  height: 78vh;
+  overflow: auto;
+  border: 1px solid #ccc;
+  background: #e9e1d3;
+}
+
+.image-wrapper {
+  position: relative;
+  width: max-content;
+  background: #f2eee8;
+}
+
+.image-wrapper img {
+  display: block;
+}
+
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.hotspot.selected { outline: 2px solid #ff0000; }
+
+.message { min-height: 1.3rem; }
+
+.list-view {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.list-header,
+.row-btn {
+  display: grid;
+  grid-template-columns: 1fr 50px 90px;
+  gap: 0.4rem;
+  text-align: left;
+  align-items: center;
+}
+
+.list-header {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #444;
+}
+
+.row-btn {
+  background: #eef2ff;
+  color: #17224a;
+}
+
+.row-btn.active { background: #d5defe; }
+
+.meta {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.refs-list {
+  margin-top: 0.4rem;
+  font-size: 0.86rem;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: #fafafa;
+}
