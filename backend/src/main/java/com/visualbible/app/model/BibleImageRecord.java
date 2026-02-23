@@ -7,7 +7,6 @@ public record BibleImageRecord(
         String name,
         String outputPath,
         String imagePath,
-        String createdAt,
         List<String> references,
         List<HighlightRegion> highlights
 ) {

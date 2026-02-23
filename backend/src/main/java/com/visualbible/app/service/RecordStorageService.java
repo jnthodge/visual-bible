@@ -3,14 +3,12 @@ package com.visualbible.app.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.visualbible.app.model.BibleImageRecord;
-import com.visualbible.app.model.HighlightRegion;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,17 +25,9 @@ public class RecordStorageService {
         this.dataFile = Path.of(dataFilePath);
     }
 
-    public synchronized BibleImageRecord save(String name, String outputPath, String imagePath, List<String> references, List<HighlightRegion> highlights) throws IOException {
+    public synchronized BibleImageRecord save(String name, String outputPath, String imagePath, List<String> references, List<com.visualbible.app.model.HighlightRegion> highlights) throws IOException {
         List<BibleImageRecord> records = loadAll();
-        BibleImageRecord record = new BibleImageRecord(
-                UUID.randomUUID().toString(),
-                name,
-                outputPath,
-                imagePath,
-                Instant.now().toString(),
-                references,
-                highlights
-        );
+        BibleImageRecord record = new BibleImageRecord(UUID.randomUUID().toString(), name, outputPath, imagePath, references, highlights);
         records.add(record);
         persist(records);
         return record;
@@ -59,8 +49,7 @@ public class RecordStorageService {
         if (content.isBlank()) {
             return new ArrayList<>();
         }
-        return mapper.readValue(content, new TypeReference<>() {
-        });
+        return mapper.readValue(content, new TypeReference<>() {});
     }
 
     private void persist(List<BibleImageRecord> records) throws IOException {

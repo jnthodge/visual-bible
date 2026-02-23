@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -37,13 +36,11 @@ public class BibleController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<CreateRecordResponse> create(
-            @RequestPart(value = "passagesFile", required = false) MultipartFile passagesFile,
+            @RequestPart("passagesFile") MultipartFile passagesFile,
             @RequestPart("name") @NotBlank String name,
-            @RequestPart("outputPath") @NotBlank String outputPath,
-            @RequestPart(value = "textReferences", required = false) String textReferences
+            @RequestPart("outputPath") @NotBlank String outputPath
     ) throws IOException {
-        InputStream inputStream = passagesFile != null && !passagesFile.isEmpty() ? passagesFile.getInputStream() : null;
-        List<String> references = parser.parsePassages(inputStream, textReferences);
+        List<String> references = parser.parsePassages(passagesFile.getInputStream());
         Path outputDir = Path.of(outputPath);
         String filename = name.replaceAll("[^a-zA-Z0-9-_]", "_") + ".png";
         Path outputImage = outputDir.resolve(filename);
